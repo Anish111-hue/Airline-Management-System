@@ -1,0 +1,335 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure that the content stretches to at least the height of the viewport */
+}
+
+header {
+    background-color: #003580;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+    flex-grow: 1; /* Allow the main content to grow to fill the remaining space */
+}
+
+footer {
+    background-color: #003580;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+}
+
+/* Top Section Styles */
+.top-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.search-container {
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trip-type {
+    flex: 0 0 15%;
+    display: block;
+    justify-content: space-between;
+}
+
+.search-fields {
+    flex: 0 0 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 0 0 calc(20% - 10px);
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    background-color: #003580;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Bottom Section Styles */
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: absolute;
+    margin-right: 20px;
+}
+
+.filters {
+    height: 100vh;
+    overflow-y: auto;
+    flex: 0 0 25%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.filters h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-option {
+    margin-bottom: 20px;
+}
+
+.filter-option h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.filter-option input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.filter-option label {
+    font-size: 14px;
+}
+
+.flights-data {
+    height: 100vh;
+    overflow-y: auto;
+    flex: 0 0 75%;
+    background-color: #e2dfdf;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+.flights-data {
+    flex: 0 0 65%;
+}
+
+.flight {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.flight .flight-details {
+    display: flex;
+    align-items: center;
+}
+
+.flight .flight-logo {
+    flex: 0 0 100px;
+    margin-right: 20px;
+}
+
+.flight .flight-logo img {
+    max-width: 100%;
+}
+
+.flight .flight-info {
+    flex-grow: 1;
+}
+
+.flight .flight-time,
+.flight .flight-duration {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.flight .flight-time span,
+.flight .flight-duration span {
+    margin-right: 10px;
+}
+
+.flight-price {
+    flex: 0 0 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.flight-price span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.flight-price button {
+    background-color: #003580;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.flight-price button:hover {
+    background-color: #001f4d;
+}
+
+.airportList li:hover{
+    background-color: yellow; /* Change to your desired highlight color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.airportList li{
+    background-color: burlywood;
+}
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.error::before {
+    content: '* ';
+}
+
+
+
+
+.selectable {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 2px solid gray;
+    margin: 5px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+.unselectable {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 2px solid gray;
+    margin: 5px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    background-color: lightgray;
+}
+  
+.selected {
+    background-color: lightblue;
+}
+.roo {
+    display: block;
+}
+
+.popup1 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-content1 {
+    text-align: center;
+  }
+  
+  .close-btn1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .le{
+    float: left;
+    width: 40%;
+    font-size: larger;
+    text-align: center
+}
+.ri{
+    float: right;
+    width: 60%;
+}
+
+
+
+.ticket-content-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.ticket {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.ticket h2 {
+    margin-bottom: 10px;
+}
+
+.ticket p {
+    margin: 5px 0;
+}
+
+.ticket .ticket-details {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+}

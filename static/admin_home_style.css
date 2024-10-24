@@ -1,0 +1,147 @@
+.left-side {
+    height: 100vh;
+    overflow-y: auto;
+    flex: 0 0 25%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+.right-side {
+    height: 100vh;
+    overflow-y: auto;
+    flex: 0 0 75%;
+    background-color: #e2dfdf;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure that the content stretches to at least the height of the viewport */
+}
+button[type="submit"] {
+    background-color: #003580;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+header {
+    background-color: #003580;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+    flex-grow: 1; /* Allow the main content to grow to fill the remaining space */
+}
+
+/* Style for the buttons */
+.button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Style for the form container */
+.form-container {
+    display: none;
+}
+
+/* Style for the active form container */
+.form-container.active {
+    display: block;
+}
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: absolute;
+    margin-right: 20px;
+}
+.main-button {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+.le{
+    float: left;
+    width: 40%;
+    font-size: larger;
+    text-align: center
+}
+.ri{
+    float: right;
+    width: 60%;
+}
+.row{
+    display: flex;
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.h2, h2{
+    font-size: 2rem;
+}
+.form-container h2{
+    text-align: center;
+}
+.form-container select .form-container input[type="text"], form-container input[type="date"], form-container input[type="time"] {
+    width: 60%;
+    padding: 8px;
+    /*margin-bottom: 10px;*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#flightForm{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+#aircraftForm {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+#airportForm {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+.airportList li:hover{
+    background-color: lightgray; /* Change to your desired highlight color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.airportList li{
+    background-color: white;
+}
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.error::before {
+    content: '* ';
+}
+
+
+
+
+
+
