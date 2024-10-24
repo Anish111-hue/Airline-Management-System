@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASMA Travels</title>
+    <!--<link rel="stylesheet" type="text/css" href="C:\Users\koppu\OneDrive\Desktop\adb\ADB_Project\static\home_style.css"/>-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home_style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--Bootstrap styling-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>ASMA Travels</h1>
+    </header>
+    
+    <main>
+        <div><button class="button" onclick="BacktoLogin()" type="submit" style="margin-bottom: 15px;">LogOut</button></div>
+        <!-- Top Section: Search Form -->
+        <div class="unpop">
+            <div class = "main">
+                <section class="top-section">
+                    <div class="search-container">
+                        <div class="trip-type" style="display: none;">
+                            <label for="one-way">One Way</label>
+                            <input type="radio" id="one-way" name="trip-type" value="one-way" checked>
+                            <label for="round-trip" style="padding-left: 20px;">Round Trip</label>
+                            <input type="radio" id="round-trip" name="trip-type" value="round-trip">
+                        </div>
+                        <div class="search-fields">
+                            <div class="form-group">
+                                <label for="from">From</label>
+                                <input type="text" id="from" name="from" placeholder="Enter city or airport" required>
+                                <div class="error searchError" for="from" id="from-error"></div>
+                                <ul class="airportList" id="airportListFrom" style="background-color: gray; position: absolute; display: none; z-index: 9999;"></ul>
+                            </div>
+                            <div class="form-group">
+                                <label for="to">To</label>
+                                <input type="text" id="to" name="to" placeholder="Enter city or airport" required>
+                                <div class="error searchError" for="to" id="to-error"></div>
+                                <ul class="airportList" id="airportListTo" style="background-color: gray; position: absolute; display: none; z-index: 9999;"></ul>
+                            </div>
+                            <div class="form-group">
+                                <label for="depart-date">Departure Date</label>
+                                <input type="text" id="depart-date" name="depart-date" onfocusout="datesetdep();" onfocusin="datecleardep();" placeholder="MMDDYYYY" required>
+                                <div class="error searchError" for="depart" id="depart-error"></div>
+                            </div>
+                            <div class="form-group return" style="display: none;">
+                                <label for="return-date">Return Date</label>
+                                <input type="date" id="return-date" name="return-date">
+                                <div class="error searchError" for="return" id="return-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="passengers">Passengers</label>
+                                <input type="number" id="passengers" name="passengers" min="1" style="width: 150px;" required>
+                                <div class="error searchError" for="passengers" id="passengers-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <button id="search_flight" type="submit">Search Flights</button>
+                                <div class="error" style="color: white;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bottom Section: Filters and Flights Data -->
+                <section class="bottom-section">
+                    <div class="filters">
+                        <!-- Filters go here (e.g., price range, airlines, etc.) -->
+                        <h2>Filters</h2>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <h3>Departure Time</h3>
+                                <input class="filterCheck" type="checkbox" id="departure-time1" value = "6" name="departure-time">
+                                <label for="departure-time1">Before 6AM</label><br>
+                                <input class="filterCheck" type="checkbox" id="departure-time2" value = "12" name="departure-time">
+                                <label for="departure-time2">6AM - 12PM</label><br>
+                                <input class="filterCheck" type="checkbox" id="departure-time3" value = "18" name="departure-time">
+                                <label for="departure-time2">12PM - 6PM</label><br>
+                                <input class="filterCheck" type="checkbox" id="departure-time4" value = "24" name="departure-time">
+                                <label for="departure-time2">After 6PM</label><br>
+                            </div>
+                            <div class="filter-option">
+                                <h3>Arrival Time</h3>
+                                <input class="filterCheck" type="checkbox" id="arrival-time1" value = "6" name="arrival-time">
+                                <label for="arrival-time1">Before 6AM</label><br>
+                                <input class="filterCheck" type="checkbox" id="arrival-time2" value = "12" name="arrival-time">
+                                <label for="arrival-time2">6AM - 12PM</label><br>
+                                <input class="filterCheck" type="checkbox" id="arrival-time3" value = "18" name="arrival-time">
+                                <label for="arrival-time2">12PM - 6PM</label><br>
+                                <input class="filterCheck" type="checkbox" id="arrival-time4" value = "24" name="arrival-time">
+                                <label for="arrival-time2">After 6PM</label><br>
+                            </div>
+                            <div class="filter-option">
+                                <h3>Price Range</h3>
+                                <!-- Add price range options as needed -->
+                                <input class="filterCheck" type="checkbox" id="price-range1" value = "0" name="price-range">
+                                <label for="price-range1">Below $200</label><br>
+                                <input class="filterCheck" type="checkbox" id="price-range2" value = "200" name="price-range">
+                                <label for="price-range2">$200 - $300</label><br>
+                                <input class="filterCheck" type="checkbox" id="price-range3" value = "300" name="price-range">
+                                <label for="price-range3">$300 - $400</label><br>
+                                <input class="filterCheck" type="checkbox" id="price-range4" value = "400" name="price-range">
+                                <label for="price-range4">Over $400</label><br>
+                                <!-- Add more price range options as needed -->
+                            </div>
+                            <!--div class="filter-option">
+                                <h3>Stops</h3>
+                                <input type="checkbox" id="stops1" name="stops">
+                                <label for="stops1">Direct</label><br>
+                                <input type="checkbox" id="stops2" name="stops">
+                                <label for="stops2">With Layovers</label><br>
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="flights-data">
+                                            
+                        <!-- Round Trip Flight 2 >
+                        <div class="flight">
+                            <div class="flight-details">
+                                <div class="flight-logo">
+                                    <img src="flight_logo.png" alt="Airline Logo">
+                                </div>
+                                <div class="flight-info">
+                                    <div class="flight-dates">
+                                        <span>Departure: 2024-04-20</span>
+                                        <span>Return: 2024-04-27</span>
+                                    </div>
+                                    <div class="flight-time">
+                                        <span>08:00 AM</span>
+                                        <span>London (LHR)</span>
+                                    </div>
+                                    <div class="flight-duration">
+                                        <span>8h 0m</span>
+                                    </div>
+                                    <div class="flight-time">
+                                        <span>04:00 PM</span>
+                                        <span>New York (JFK)</span>
+                                    </div>
+                                </div>
+                                <div class="flight-price">
+                                    <span>$550</span>
+                                    <button>Book Now</button>
+                                </div>
+                            </div>
+                        </div-->
+                    
+                        
+                    </div>
+                </section>
+            </div> 
+
+            <div class = "popup" style="display: none;">
+                <span class="close">&times;</span>
+                <div id="selseat" class="selseat_main">
+                    <h2>Select Seats</h2>
+                    <div class="seat-content">
+                        
+                    </div>
+                    <button id="book" type="submit" onclick="validateSelectedSeats()">Book</button>
+                </div>
+                <div id="bookpop" class="bookpop_main" style="display: none;">
+                    <div class="bookpop-content">
+                        <div class="bookpop-content-body"></div>
+                        <div class="bookpop-content-button">
+                            <button id="book" type="submit" onclick="validatePassengers()">Book</button>
+                            <button id="backbook" type="submit" onclick="backtoSelectedSeats()">Back</button>
+                        </div>
+                    </div>
+                    <div class = "bookpay-content" style="display: none;">
+                        <h2 class="amm"></h2>
+                        <div id="paymentForm" onsubmit="submitForm(event)">
+                            <label for="fullName">Full Name:</label><br>
+                            <input type="text" id="fullName" name="fullName" required><br><br>
+                            
+                            <label for="email">Email Address:</label><br>
+                            <input type="email" id="email" name="email" required><br><br>
+                            
+                            <label for="phone">Phone Number:</label><br>
+                            <input type="tel" id="phone" name="phone" required><br><br>
+                            
+                            <label for="creditCard">Credit Card Number:</label><br>
+                            <input type="text" id="creditCard" name="creditCard" required><br><br>
+                            
+                            <label for="expiryDate">Expiry Date:</label><br>
+                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" required><br><br>
+                            
+                            <label for="cvv">CVV:</label><br>
+                            <input type="text" id="cvv" name="cvv" required><br><br>
+                            
+                            <label for="billingAddress">Billing Address:</label><br>
+                            <textarea id="billingAddress" name="billingAddress"></textarea><br><br>
+                            
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I accept the terms and conditions</label><br><br>
+                            
+                            <button type="submit" onclick="updateBooking();">Pay Now</button>
+                            <!--button type="submit"></button-->
+                        </div>
+                    </div>
+                    <div class = "ticket-content" style="display: none;">
+                        <div class="ticket-content-body"></div>
+                        <div class="ticket-content-button">
+                            <button id="done" type="submit" onclick="doneFun()">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <!--<script src="/C:/Users/koppu/OneDrive/Desktop/adb/ADB_Project/static/login_script.js"></script>-->
+    <script src="{{ url_for('static', filename='home_script.js') }}"></script>
+</body>
+</html>

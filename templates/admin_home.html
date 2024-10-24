@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ASMA Travels</title>
+        <!--<link rel="stylesheet" type="text/css" href="C:\Users\koppu\OneDrive\Desktop\adb\ADB_Project\static\admin_home_style.css"/>-->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_home_style.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!--Bootstrap styling-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <!-- jQuery library -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <h1>ASMA Travels</h1>
+        </header>
+        <main>
+            <section class="main-section">
+                <div class="left-side">
+                    <div class="main-button">
+                        <button class="button" onclick="showForm('flightForm')" type="submit">Add Flight</button>
+                        <button class="button" onclick="showForm('aircraftForm')" type="submit">Add Aircraft</button>
+                        <button class="button" onclick="showForm('airportForm')" type="submit">Add Airport</button>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <!-- Flight Form -->
+                    <div id="flightForm" class="form-container">
+                        <h2>Add Flight Form</h2>
+                        <div class="row">
+                            <label class="le" for="fromFlight">Departure Airport:</label>
+                            <div class="ri">
+                                <input type="text" id="fromFlight" placeholder="Enter Deparure airport" required>
+                                <ul class="airportList" id="airportListFrom" style="background-color: gray; position: absolute; display: none"></ul>
+                                <div class="error flightError" for="fromFlight" id="from-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="toFlight">Arrival Airport:</label>
+                            <div class="ri">
+                                <input type="text" id="toFlight" placeholder="Enter Arrival airport" required>
+                                <ul class="airportList" id="airportListTo" style="background-color: gray; position: absolute; display: none"></ul>
+                                <div class="error flightError" for="toFlight" id="to-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="depDateFlight">Departure Date:</label>
+                            <div class="ri">
+                                <input type="text" id="depDateFlight" onfocusout="datesetdep();" onfocusin="datecleardep()" placeholder="MMDDYYYY" required>
+                                <div id="depTime">
+                                    <select id="dephour">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <select id="depminute">
+                                        <option value="00">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </select>
+                                    <select id="depampm">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="error flightError" for="depDateFlight" id="depdate-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="arrDateFlight">Arrival Date:</label>
+                            <div class="ri">
+                                <input type="text" id="arrDateFlight" onfocusout="datesetarr();" onfocusin="datecleararr()" placeholder="MMDDYYYY" required>
+                                <div id="arrTime">
+                                    <select id="arrhour">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <select id="arrminute">
+                                        <option value="00">00</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </select>
+                                    <select id="arrampm">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                                <div class="error flightError" for="arrDateFlight" id="arrdate-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="aircraftFlight">Aircraft Number:</label>
+                            <select class="ri" id="aircraftFlight" style="width: 60%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" required></select>
+                            <!--input class="ri" type="text" id="aircraftFlight" placeholder="Enter aircraft id" required-->
+                        </div>
+                        <div class="row">
+                            <label class="le" for="flightID">Flight ID:</label>
+                            <div class="ri">
+                                <input type="text" id="flightID" placeholder="Enter unique ID" required>
+                                <div class="error flightError" for="flightID" id="id-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: none;">
+                            <label class="le" for="depTimeFlight">Departure Time:</label>
+                            <div class="ri">
+                                <input type="time" id="depTimeFlight" required>
+                                <div class="error flightError" for="depTimeFlight" id="deptime-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: none;">
+                            <label class="le" for="arrTimeFlight">Arrival Time:</label>
+                            <div class="ri">
+                                <input type="time" id="arrTimeFlight" required>
+                                <div class="error flightError" for="arrTimeFlight" id="arrtime-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="price">Price:</label>
+                            <div class="ri">
+                                <input type="text" id="price" placeholder="Enter Price" required>
+                                <div class="error flightError" for="price" id="price-flight-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button class="button" onclick="validateFlight()" type="submit">Add Flight</button>
+                        </div>
+                    </div>
+
+                    <!-- Aircraft Form -->
+                    <div id="aircraftForm" class="form-container">
+                        <h2>Add Aircraft Form</h2>
+                        <div class="row">
+                            <label class="le" for="aircraftType">Aircraft Type:</label>
+                            <select class="ri" id="aircraftType" style="width: 60%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" required>
+                                <option value="Boeing">Boeing</option>
+                                <option value="Airbus">Air Bus</option>
+                                <option value="Embraer">Embraer</option>
+                                <option value="Bombardier">Bombardier</option>
+                                <option value="Comac">Comac</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="registrationNumber">Registration Number:</label>
+                            <div class="ri">
+                                <input type="text" id="registrationNumber" required>
+                                <div class="error aircraftError" for="registrationNumber" id="reg-aircraft-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="seating">Seating:</label>
+                            <div class="ri">
+                                <input type="text" id="seating" required>
+                                <div class="error aircraftError" for="seating" id="seating-aircraft-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="maintenance">Last Maintenance:</label>
+                            <div class="ri">
+                                <input type="date" id="maintenance" required>
+                                <div class="error aircraftError" for="maintenance" id="maintenance-aircraft-error"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <button class="button" onclick="validateAircraft()" type="submit">Add Aircraft</button>
+                        </div>
+                    </div>
+
+                    <!-- Airport Form -->
+                    <div id="airportForm" class="form-container">
+                        <h2>Add Airport Form</h2>
+                        <div class="row">
+                            <label class="le" for="airportCode">Airport Code:</label>
+                            <div class="ri">
+                                <input type="text" id="airportCode" required>
+                                <div class="error airportError" for="airportCode" id="code-airport-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="location">Location:</label>
+                            <div class="ri">
+                                <input type="text" id="location" required>
+                                <div class="error airportError" for="location" id="location-airport-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="portname">Airport Name:</label>
+                            <div class="ri">
+                                <input type="text" id="portname" required>
+                                <div class="error airportError" for="portname" id="portname-airport-error"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="le" for="timezone">Timezone:</label>
+                            <div class="ri">
+                                <input type="number" id="timezone" required>
+                                <div class="error airportError" for="timezone" id="timezone-airport-error"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <button class="button" onclick="validateAirport()" type="submit">Add Airport</button>
+                        </div>
+                    </div>
+                    <div><button class="button" onclick="BacktoLogin()" type="submit">LogOut</button></div>
+                </div>
+            </section>
+        </main>
+        <!--<script src="/C:/Users/koppu/OneDrive/Desktop/adb/ADB_Project/static/admin_home_script.js"></script>-->
+        <script src="{{ url_for('static', filename='admin_home_script.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASMA Airlines</title>
+    <!--<link rel="stylesheet" type="text/css" href="/C:/Users/koppu/OneDrive/Desktop/adb/ADB_Project/static/login_style.css"/>-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login_style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--Bootstrap styling-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>Airline Management System</h1>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <div class="slider" id="sliderID">
+                <span id="admin-tab" class="tab" onclick="toggleTab('admin')">Admin</span>
+                <span id="user-tab" class="tab active" onclick="toggleTab('user')">User</span>
+            </div>
+
+            <div id="admin-login" class="login-form" style="display: none;">
+                <h2>Admin Login</h2>
+                <div class="adminLoginDiv">
+                    <label for="admin-username">Username:</label>
+                    <input type="text" id="admin-username" name="admin-username" required>
+                    <label for="admin-password">Password:</label>
+                    <input type="password" id="admin-password" name="admin-password" required>
+                    <div class="error" for="admin" id="admin-error"></div>
+                    <button type="submit" onclick="logAdminIn();">Login</button>
+                </div>
+            </div>
+
+            <div id="user-login" class="login-form">
+                <h2>User Login</h2>
+                <div class="userLoginDiv">
+                    <label for="user-username">Username:</label>
+                    <input type="text" id="user-username" name="user-username" required>
+                    <label for="user-password">Password:</label>
+                    <input type="password" id="user-password" name="user-password" required>
+                    <div class="error" for="login" id="login-error"></div>
+                    <button type="submit" onclick="logUserIn();">Login</button>
+                    <p>didn't have account? <a href="javascript:toggleTab('user_register')">create one</a></p>
+                </div>
+            </div>
+
+            <div id="registration" class="login-form" style="display: none;">
+                <h2>Register</h2>
+                <div class="registerDiv">
+                    <label for="first-name">First Name:<div class="error" for="first-name" id="first-name-error"></div></label>
+                    <input type="text" id="first-name" name="first-name" class="inp" required>
+                    <label for="last-name">Last Name:<div class="error" for="last-name" id="last-name-error"></div></label>
+                    <input type="text" id="last-name" name="last-name" class="inp" required>
+                    <label for="email">Email:<div class="error" for="email" id="email-error"></div></label>
+                    <input type="email" id="email" name="email" style="width: 100%;padding: 8px;margin-bottom: 10px;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;" class="inp" required>
+                    <label for="phone">Phone:<div class="error" for="phone" id="phone-error"></div></label>
+                    <input type="text" id="phone" name="phone" class="inp" required>
+
+
+                    <label for="city">City:<div class="error" for="city" id="city-error"></div></label>
+                    <input type="text" id="city" name="city" class="inp" required>
+                    <label for="state">State:<div class="error" for="state" id="state-error"></div></label>
+                    <input type="text" id="state" name="state" class="inp" required>
+                    <label for="zip">ZipCode:<div class="error" for="zip" id="zip-error"></div></label>
+                    <input type="text" id="zip" name="zip" class="inp" required>
+
+
+
+                    <label for="user-id">User Name:<div class="error" for="user-id" id="user-id-error"></div></label>
+                    <input type="text" id="user-id" name="user-id" class="inp" onchange="isUserIdAlreadyExists();" required>
+                    <label for="password">Password:<div class="error" for="password" id="password-error"></div></label>
+                    <input type="password" id="password" name="password" class="inp" required>
+                    <label for="confirmpassword">Confirm Password:<div class="error" for="confirmpassword" id="confirm-password-error"></div></label>
+                    <input type="password" id="confirmpassword" name="confirmpassword" class="inp" required>
+                    <button type="submit" onclick="validateUserRegistration();">Register</button>
+                    <p>Already Registered? <a href="javascript:toggleTab('user')">Log in</a></p>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ASMA Airlines</p>
+    </footer>
+    <!--<script src="/C:/Users/koppu/OneDrive/Desktop/adb/ADB_Project/static/login_script.js"></script>-->
+    <script src="{{ url_for('static', filename='login_script.js') }}"></script>
+</body>
+</html>
